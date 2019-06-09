@@ -1,0 +1,59 @@
+#Set the working directory using setwd() and read the text files from there.
+readLines("football.txt")
+
+#Coverts into a number of lines. 
+str(readLines("football.txt"))
+
+#Converts those number of lines into a single line. 
+paste(readLines("football.txt"), collapse = " ")
+
+#Assigning the single line into a variable called text.
+text <- paste(readLines("football.txt"), collapse = " ")
+text
+
+#Cleaning the lines
+#Finds the unwanted puncuations like spaces and replace it them with spaces in our text
+gsub(pattern = "\\W", replace = " ", text)
+text <- gsub(pattern = "\\W", replace = " ", text)
+
+# gsub function is used in text filtering. \\d find the numbers and replace them with the blank space
+text <- gsub(pattern = "\\d", replace = " ", text)
+text
+
+#Changing all thw words to lowercases
+tolower(text)
+text <- tolower(text)
+text
+
+#Installing package tm for text mining purpose.
+install.packages("tm")
+
+#Loading the tm package.
+library(tm)
+
+#Removing stopwords like and, the etc
+removeWords(text, stopwords())
+
+#Remove extra space
+stripWhitespace(text)
+text <- stripWhitespace(text)
+
+
+#Installing package tm for text mining purpose.
+install.packages("stringr")
+install.packages("wordcloud")
+
+#Loading the packages
+library(stringr)
+library(wordcloud)
+
+#Changing text from list to characters.
+text <- str_split(text, pattern = "\\s+")
+
+#Checking the type of text
+class(text)
+textbag <- unlist(text)
+class(text)
+
+#Visualizing the number of words that we have filtered by using the wordcloud function. 
+wordcloud(text, min.freq = 0.5, random.order = FALSE, scale = c(3,0.5), color = rainbow(3))
